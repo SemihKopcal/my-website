@@ -1,0 +1,158 @@
+.mainC {
+  position: relative;
+  top: -160px;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* karartma efekti */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainContent {
+  text-align: center;
+  color: white;
+  /* padding: 20px; */
+  padding: 0;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  z-index: 2;
+  position: relative;
+}
+
+.profileImage {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  object-fit: cover;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  z-index: 2;
+  padding: 0;
+  position: relative;
+  top: 100px;
+}
+
+.profileImage:hover {
+  transform: scale(1.1);
+}
+
+.description {
+  font-size: 3rem;
+  z-index: 2;
+  position: relative;
+  margin-bottom: 2rem;
+  font-weight: bold;
+
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  z-index: 2;
+  flex-direction: column;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.cvButton {
+  background-color: #b33333;
+  color: white;
+  padding: 1rem 30px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.cvButton:hover {
+  background-color: #d34b29;
+  transform: translateY(-2px);
+}
+
+.cvButton:active {
+  transform: scale(0.98);
+}
+
+.cwe {
+  display: inline-block;
+  padding: 1rem 30px;
+
+  background-color: #0d6efd;
+  /* Canlı mavi ton */
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cwe:hover,
+.cwe:focus {
+  background-color: #084cd9;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4);
+  outline: none;
+}
+
+.icon {
+  margin-left: 8px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .buttons {
+    display: flex;
+    gap: 20px;
+    z-index: 2;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1.5rem;
+  }
+
+  .profileImage {
+    width: 200px;
+    height: 200px;
+  }
+}

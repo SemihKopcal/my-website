@@ -1,0 +1,59 @@
+.sectionContainer {
+  padding: 40px 0;
+  overflow: hidden;
+  background-color: var(--bg-color); /* Tema kontrollü zemin */
+  color: var(--text-color); /* Tema kontrollü metin */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.scrollerWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.logoScroller {
+  display: flex;
+  gap: 30px;
+  padding: 10px 0;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.logoScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.logoItem {
+  min-width: 120px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.logoItem img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.logoItem img:hover {
+  transform: scale(1.1);
+  filter: none;
+}
+
+.logoName {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: var(--text-color);
+}

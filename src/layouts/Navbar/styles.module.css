@@ -1,0 +1,228 @@
+/* ——— Ana Yapı ——— */
+.mainHeader {
+  width: 100%;
+  position: relative;
+  z-index: 999;
+}
+
+.headerUpper {
+  /* background: var(--black-color); */
+  padding: 20px 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Logo ve Menü Kolonu */
+.logoCol {
+  flex: 0 0 20%;
+  max-width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.menuCol {
+  flex: 0 0 80%;
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ——— Logo ——— */
+.logoArea {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+}
+
+/* ——— Menü ——— */
+.mainMenu {
+  text-align: right;
+  /* Desktop menü görünürlüğü */
+  display: block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.onepage {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.linkStyle {
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: capitalize;
+  transition: color 0.3s;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.linkStyle:hover {
+  color: var(--main-color);
+}
+
+.utilityButtons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  /* margin-left: 20px; */
+}
+
+.langBtn,
+.themeBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.langBtn:hover,
+.themeBtn:hover {
+  transform: scale(1.1);
+}
+
+@media (min-width: 768px) and (max-width: 1499px) {
+  .logoCol {
+    flex: 0 0 25%;
+    max-width: 25%;
+    justify-content: center;
+  }
+
+  .menuCol {
+    flex: 0 0 75%;
+    max-width: 75%;
+    justify-content: flex-end;
+  }
+
+  .onepage {
+    gap: 20px;
+  }
+
+  .linkStyle {
+    font-size: 1.4rem;
+  }
+
+  .langBtn,
+  .themeBtn {
+    font-size: 0.9rem;
+  }
+}
+
+/* @media (max-width: 1299px) {
+
+  .logoCol {
+    flex-basis: 10%;
+    max-width: 10%;
+  }
+
+  .menuCol {
+    flex-basis: 90%;
+    max-width: 90%;
+  }
+} */
+/* 
+@media (max-width: 991px) {
+
+  .logoCol,
+  .menuCol {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+} */
+
+@media (max-width: 575px) {
+
+  /* xs */
+  .logoCol {
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+
+  .menuCol {
+    flex-basis: 60%;
+    max-width: 60%;
+  }
+}
+
+
+
+/* ——— Mobil Menü Butonu ——— */
+.sideMenuBtn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  margin-left: 20px;
+  color: var(--text-color);
+  background-color: none;
+  cursor: pointer;
+  display: none;
+}
+
+.sideMenuBtn:hover {
+  background-color: none;
+}
+
+/* ——— Mobil Versiyon İyileştirmeleri ——— */
+@media (max-width: 768px) {
+
+  /* Hamburger butonu görünür */
+  .sideMenuBtn {
+    display: block;
+    z-index: 1000;
+  }
+
+  /* CSS does not support :onClick pseudo-class. Use a class like .active or .open in JS. */
+  /* Example: */
+  .sideMenuBtn.active {
+    background-color: none;
+    color: #fff;
+  }
+
+  /* Menü başlangıçta gizli, açılıp kapanacak */
+  .mainMenu {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    background: rgba(0, 0, 0, 0.75);
+    width: 50%;
+    height: 100vh;
+    align-items: center;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    transform: translateY(20px);
+    /* Burayı +20px yaparak yazılar biraz aşağıdan başlasın */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  .menuOpen {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .onepage {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .linkStyle {
+    font-size: 1.2rem;
+  }
+}
+
