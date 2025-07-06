@@ -12,7 +12,7 @@ function Main() {
 
   // Dil bazlı metinler
   const texts = {
-    title: language === "tr" ? "Semih Kopcal Portföy" : "Semih Kopcal Portfolio",
+    title: language === "tr" ? "Semih Kopcal Portfolyo" : "Semih Kopcal Portfolio",
     subtitle: language === "tr" ? "Full-Stack Web Geliştirici" : "Full-Stack Web Developer",
     downloadCV: language === "tr" ? "CV'mi İndir" : "Download My CV",
     contactMe: language === "tr" ? "İletişime Geç" : "Contact Me",
