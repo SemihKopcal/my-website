@@ -4,6 +4,11 @@
   position: relative;
   z-index: 999;
 }
+.container {
+  width: 100%;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+}
 
 .headerUpper {
   /* background: var(--black-color); */
@@ -14,6 +19,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  max-width: 100%;
 }
 
 /* Logo ve Menü Kolonu */
@@ -119,28 +125,6 @@
   }
 }
 
-/* @media (max-width: 1299px) {
-
-  .logoCol {
-    flex-basis: 10%;
-    max-width: 10%;
-  }
-
-  .menuCol {
-    flex-basis: 90%;
-    max-width: 90%;
-  }
-} */
-/* 
-@media (max-width: 991px) {
-
-  .logoCol,
-  .menuCol {
-    flex-basis: 50%;
-    max-width: 50%;
-  }
-} */
-
 @media (max-width: 575px) {
 
   /* xs */
@@ -162,7 +146,7 @@
   background: none;
   border: none;
   font-size: 1.8rem;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   color: var(--text-color);
   background-color: none;
   cursor: pointer;
@@ -171,6 +155,7 @@
 
 .sideMenuBtn:hover {
   background-color: none;
+  color: #fff;
 }
 
 /* ——— Mobil Versiyon İyileştirmeleri ——— */

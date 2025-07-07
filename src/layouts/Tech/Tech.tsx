@@ -115,7 +115,7 @@ export default function TechLogoScroller() {
       <h2 className={styles.title}>{titleText}</h2>
       <div className={styles.scrollerWrapper}>
         <div ref={scrollRef} className={styles.logoScroller}>
-          {[...logos, ...logos].map((logo, index) => (
+          {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
             <div key={index} className={styles.logoItem}>
               <img src={logo.src} alt={logo.name} draggable={false} />
               <p className={styles.logoName}>{logo.name}</p>

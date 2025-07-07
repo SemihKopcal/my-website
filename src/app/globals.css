@@ -80,17 +80,14 @@ a {
 a:hover {
   color: var(--hover-color);
 }
-
-button {
-  background-color: var(--button-bg);
-  color: var(--button-text-color);
-  border: none;
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
+/*  */
+/* 
 button:hover {
   background-color: var(--hover-color);
+} */
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }

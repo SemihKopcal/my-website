@@ -8,7 +8,7 @@ import Footer from "@/layouts/Footer";
 
 export default function Home() {
   return (
-    <div>
+    <div className="container">
       <Navbar />
       <Main/>
       <Tech />

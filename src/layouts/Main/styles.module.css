@@ -2,11 +2,13 @@
   position: relative;
   top: -160px;
   width: 100%;
+  min-width: 100%;
 }
 
 .container {
   width: 100%;
   min-height: 100vh;
+  min-width: 100%;
   background-image: url('/hero-image.jpg');
   background-size: cover;
   background-position: center;

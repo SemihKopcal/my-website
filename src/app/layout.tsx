@@ -62,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" style={{ margin: "0", padding: "0" }}>
+    <html lang="tr" style={{ margin: "0", padding: "0", minWidth: "100%" }}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
