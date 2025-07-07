@@ -1,31 +1,36 @@
-export const runtime = "nodejs";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("RESEND_API_KEY environment variable is missing");
+}
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(req: Request) {
-  const { fullName, email, subject, message } = await req.json();
-
+export async function POST(request: NextRequest) {
   try {
-    const data = await resend.emails.send({
-      from: "onboarding@resend.dev", // Bu, Resend hesabından onaylı olmalı
-      to: process.env.MAIL_RECEIVER!,
-      subject: `Portfolio Contact: ${subject}`,
-      html: `
-        <p><strong>Name:</strong> ${fullName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong><br/>${message}</p>
-      `,
-      replyTo: email,
+    const { to, subject, text } = await request.json();
+
+    if (!to || !subject || !text) {
+      return NextResponse.json(
+        { error: "Missing required fields: to, subject or text" },
+        { status: 400 }
+      );
+    }
+
+    await resend.emails.send({
+      from: "info@semihkopcal.com",
+      to,
+      subject,
+      text,
     });
 
-    console.log("Resend response:", data);
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ message: "Email sent successfully" });
   } catch (error) {
-    console.error("Resend Error:", error);
-    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    console.error("Send email error:", error);
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 }
+    );
   }
 }

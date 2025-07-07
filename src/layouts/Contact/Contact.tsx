@@ -19,7 +19,9 @@ export default function Contact() {
 
   const [loading, setLoading] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
-  const [responseStatus, setResponseStatus] = useState<"success" | "error" | "">("");
+  const [responseStatus, setResponseStatus] = useState<
+    "success" | "error" | ""
+  >("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,21 +38,33 @@ export default function Contact() {
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          to: "semihkopcal1@gmail.com",
+          subject: formData.subject,
+          text: `
+    Gönderen: ${formData.fullName} <${formData.email}>
+    Mesaj:
+    ${formData.message}
+  `,
+        }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
         setResponseMsg(
-          language === "tr" ? "Mesaj başarıyla gönderildi!" : "Message sent successfully!"
+          language === "tr"
+            ? "Mesaj başarıyla gönderildi!"
+            : "Message sent successfully!"
         );
         setResponseStatus("success");
         setFormData({ fullName: "", email: "", subject: "", message: "" });
       } else {
         setResponseMsg(
           data.error ||
-            (language === "tr" ? "Mesaj gönderilemedi." : "Failed to send message.")
+            (language === "tr"
+              ? "Mesaj gönderilemedi."
+              : "Failed to send message.")
         );
         setResponseStatus("error");
       }
@@ -98,7 +112,9 @@ export default function Contact() {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
-          <label htmlFor="fullName">{language === "tr" ? "AD SOYAD" : "FULL NAME"}</label>
+          <label htmlFor="fullName">
+            {language === "tr" ? "AD SOYAD" : "FULL NAME"}
+          </label>
           <input
             className={styles.inputField}
             id="fullName"
@@ -111,7 +127,9 @@ export default function Contact() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label htmlFor="email">{language === "tr" ? "E-POSTA ADRESİ" : "EMAIL ADDRESS"}</label>
+          <label htmlFor="email">
+            {language === "tr" ? "E-POSTA ADRESİ" : "EMAIL ADDRESS"}
+          </label>
           <input
             className={styles.inputField}
             id="email"
@@ -125,7 +143,9 @@ export default function Contact() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label htmlFor="subject">{language === "tr" ? "KONU" : "SUBJECT"}</label>
+          <label htmlFor="subject">
+            {language === "tr" ? "KONU" : "SUBJECT"}
+          </label>
           <input
             className={styles.inputField}
             id="subject"
@@ -137,7 +157,9 @@ export default function Contact() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label htmlFor="message">{language === "tr" ? "MESAJINIZ" : "YOUR MESSAGE"}</label>
+          <label htmlFor="message">
+            {language === "tr" ? "MESAJINIZ" : "YOUR MESSAGE"}
+          </label>
           <textarea
             className={styles.textArea}
             id="message"
