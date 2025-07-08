@@ -74,3 +74,18 @@
   line-height: 1.7;
   white-space: pre-line;
 }
+
+.projectLink{
+  display: inline-block;
+  margin-top: 16px;
+  /* padding: 10px 20px; */
+  background-color: #07262b;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.projectLink:hover {
+  background-color: #385255;
+}

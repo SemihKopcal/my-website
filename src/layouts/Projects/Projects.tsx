@@ -9,7 +9,8 @@ const projectsData = {
     {
       id: 1,
       title: "Menu Leaf – Dijital Menü Yönetim Sistemi",
-      description: `Menu Leaf, restoran, kafe ve benzeri işletmelerin hızlı, kolay ve özelleştirilebilir bir şekilde dijital menüler oluşturmasını sağlayan modern bir web uygulamasıdır. 
+      description: ` https://menu-leaf.com/tr
+Menu Leaf, restoran, kafe ve benzeri işletmelerin hızlı, kolay ve özelleştirilebilir bir şekilde dijital menüler oluşturmasını sağlayan modern bir web uygulamasıdır. 
 
 🔧 Teknolojiler:
 - Next.js (App Router), TypeScript, CSS Modules
@@ -39,7 +40,8 @@ Proje; bileşen bazlı yapıda, TypeScript ile güvenli ve sürdürülebilir bir
     {
       id: 2,
       title: "Bilir Nakliyat – Güvenli ve Profeyonel Nakliye Platformu",
-      description: `Bilir Nakliyat, Türkiye’nin her köşesine **sigortalı, güvenli ve zamanında** nakliye hizmeti sunan modern bir web platformudur. Web sitesi; şehir içi, şehirler arası, evden eve, ofis taşıma, hafriyat, paketleme-depolama, ambalaj, parsiyel ve asansörlü taşıma gibi **çeşitli lojistik hizmetlerini** tanıtarak müşterilere **kolay iletişim** ve **talep formu** imkânı sağlar.
+      description: `https://bilirnakliyat.net
+Bilir Nakliyat, Türkiye’nin her köşesine **sigortalı, güvenli ve zamanında** nakliye hizmeti sunan modern bir web platformudur. Web sitesi; şehir içi, şehirler arası, evden eve, ofis taşıma, hafriyat, paketleme-depolama, ambalaj, parsiyel ve asansörlü taşıma gibi **çeşitli lojistik hizmetlerini** tanıtarak müşterilere **kolay iletişim** ve **talep formu** imkânı sağlar.
 
 ✅ **Kilometre Taşları ve Vizyon:**
 - “Zamanında taşıma” garantisi ile hizmet sunumu  
@@ -148,7 +150,8 @@ Bu platform, hem içerik üretimi hem de danışan takibi anlamında dijital ça
     {
       id: 1,
       title: "Menu Leaf – Digital Menu Management System",
-      description: `Menu Leaf is a modern web application that enables restaurants, cafes, and similar businesses to create digital menus quickly, easily, and customizable.
+      description: `https://menu-leaf.com/tr
+Menu Leaf is a modern web application that enables restaurants, cafes, and similar businesses to create digital menus quickly, easily, and customizable.
 
 🔧 Technologies:
 - Next.js (App Router), TypeScript, CSS Modules
@@ -178,7 +181,8 @@ The project is developed with a component-based structure and a secure, maintain
     {
       id: 2,
       title: "Bilir Nakliyat – Secure and Professional Moving Platform",
-      description: `Bilir Nakliyat is a modern web platform that provides **insured, secure, and timely** moving services to every corner of Turkey. The website introduces various logistics services such as city, intercity, home-to-home, office moving, excavation, packing-storage, packaging, partial and elevator transport, enabling customers to communicate easily and submit requests.
+      description: `https://bilirnakliyat.net
+  Bilir Nakliyat is a modern web platform that provides **insured, secure, and timely** moving services to every corner of Turkey. The website introduces various logistics services such as city, intercity, home-to-home, office moving, excavation, packing-storage, packaging, partial and elevator transport, enabling customers to communicate easily and submit requests.
 
 ✅ **Milestones and Vision:**
 - Service with “on-time delivery” guarantee
@@ -302,22 +306,47 @@ export default function Projects() {
         {language === "tr" ? "PROJELERİM" : "MY PROJECTS"}
       </h1>
       <div className={styles.projectList}>
-        {projects.map((project) => (
-          <div key={project.id} className={styles.projectItem}>
-            <h2 className={styles.projectTitle}>{project.title}</h2>
-            <div className={styles.imagesWrapper}>
-              {project.images.map((src, idx) => (
-                <img
-                  key={idx}
-                  src={src}
-                  alt={`${project.title} image ${idx + 1}`}
-                  className={styles.projectImage}
-                />
-              ))}
+        {projects.map((project) => {
+          const lines = project.description.trim().split("\n");
+          const firstLine = lines[0].trim();
+          const restDescription = lines.slice(1).join("\n");
+
+          return (
+            <div key={project.id} className={styles.projectItem}>
+              <h2 className={styles.projectTitle}>{project.title}</h2>
+
+              <div className={styles.imagesWrapper}>
+                {project.images.map((src, idx) => (
+                  <img
+                    key={idx}
+                    src={src}
+                    alt={`${project.title} image ${idx + 1}`}
+                    className={styles.projectImage}
+                  />
+                ))}
+              </div>
+
+              <p className={styles.projectDescription}>
+                {firstLine.startsWith("http") ? (
+                  <>
+                    <a
+                      href={firstLine}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.projectLink}
+                    >
+                      {firstLine}
+                    </a>
+                    <br />
+                    {restDescription}
+                  </>
+                ) : (
+                  project.description
+                )}
+              </p>
             </div>
-            <p className={styles.projectDescription}>{project.description}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

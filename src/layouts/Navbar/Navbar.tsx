@@ -1,15 +1,15 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { useLanguage } from "@/context/LanguageContext";
-// import { useTheme } from "@/context/ThemeContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null); // Menüye referans
   const { language, setLanguage } = useLanguage();
-  // const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -33,6 +33,22 @@ export default function Navbar() {
 
   const currentItems = language === "tr" ? navItems.tr : navItems.en;
 
+  // 🔒 Sayfa dışına tıklanınca menüyü kapat
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMenuOpen]);
+
   return (
     <header className={styles.mainHeader}>
       <div className={styles.headerUpper}>
@@ -52,7 +68,7 @@ export default function Navbar() {
             </div>
 
             {/* Menü */}
-            <div className={styles.menuCol}>
+            <div className={styles.menuCol} ref={menuRef}>
               <nav
                 className={`${styles.mainMenu} ${
                   isMenuOpen ? styles.menuOpen : ""
@@ -81,10 +97,6 @@ export default function Navbar() {
                     >
                       {language === "tr" ? "EN" : "TR"}
                     </button>
-
-                    {/* <button onClick={toggleTheme} className={styles.themeBtn}>
-                      {theme === "dark" ? "☀️" : "🌙"}
-                    </button> */}
                   </li>
                 </ul>
               </nav>

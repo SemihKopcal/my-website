@@ -71,15 +71,15 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-a {
+/* a {
   color: var(--link-color);
   text-decoration: none;
   transition: color 0.3s ease;
-}
+} */
 
-a:hover {
+/* a:hover {
   color: var(--hover-color);
-}
+} */
 /*  */
 /* 
 button:hover {
