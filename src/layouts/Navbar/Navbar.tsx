@@ -58,7 +58,7 @@ export default function Navbar() {
             <div className={styles.logoCol}>
               <Link href="/" className={styles.logoArea} onClick={closeMenu}>
                 <Image
-                  src="/logo.png"
+                  src="/logo.svg"
                   alt="Logo"
                   width={150}
                   height={100}
@@ -86,21 +86,18 @@ export default function Navbar() {
                       </Link>
                     </li>
                   ))}
-
-                  {/* Butonlar */}
-                  <li className={styles.utilityButtons}>
-                    <button
-                      onClick={() =>
-                        setLanguage(language === "tr" ? "en" : "tr")
-                      }
-                      className={styles.langBtn}
-                    >
-                      {language === "tr" ? "EN" : "TR"}
-                    </button>
-                  </li>
                 </ul>
               </nav>
-
+              {/* Butonlar */}
+              <li className={styles.utilityButtons}>
+                <button
+                  onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
+                  className={styles.langBtn}
+                >
+                  {language === "tr" ? "EN" : "TR"}
+                </button>
+              </li>
+              
               {/* Mobil Menü Butonu */}
               <button
                 aria-label="Menüyü Aç"

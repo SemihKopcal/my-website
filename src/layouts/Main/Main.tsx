@@ -35,7 +35,7 @@ function Main() {
             <p className={styles.description}>{texts.subtitle}</p>
 
             <div className={styles.buttons}>
-              <a href="/cv/Semih Kopcal.pdf" download className={styles.cvButton}>
+              <a href="/cv/SemihKopcal.pdf" download className={styles.cvButton}>
                 {texts.downloadCV}
               </a>
 

@@ -32,9 +32,9 @@ Menu Leaf, restoran, kafe ve benzeri işletmelerin hızlı, kolay ve özelleşti
 
 Proje; bileşen bazlı yapıda, TypeScript ile güvenli ve sürdürülebilir bir mimariyle geliştirilmiştir.`,
       images: [
-        "/images/nokta-kafe.png",
-        "/images/doya-doya.png",
-        "/images/menu-leaf.png",
+        "/images/nokta-kafe.jpg",
+        "/images/doya-doya.jpg",
+        "/images/menu-leaf.jpg",
       ],
     },
     {
@@ -70,9 +70,9 @@ Bilir Nakliyat, Türkiye’nin her köşesine **sigortalı, güvenli ve zamanın
 - Hafriyat / paketleme & depolama  
 - Ambalaj / parsiyel / asansörlü taşımacılık`,
       images: [
-        "/images/bilir-nakliyat1.png",
-        "/images/bilir-nakliyat2.png",
-        "/images/bilir-nakliyat3.png",
+        "/images/bilir-nakliyat1.jpg",
+        "/images/bilir-nakliyat2.jpg",
+        "/images/bilir-nakliyat3.jpg",
       ],
     },
     {
@@ -107,7 +107,7 @@ Bilir Nakliyat, Türkiye’nin her köşesine **sigortalı, güvenli ve zamanın
       images: [
         "/images/tabu-epic.png",
         "/images/tabu.jpg",
-        "/images/tabu-2.jpg",
+        // "/images/tabu-2.jpg",
       ],
     },
     {
@@ -140,9 +140,9 @@ Bilir Nakliyat, Türkiye’nin her köşesine **sigortalı, güvenli ve zamanın
 
 Bu platform, hem içerik üretimi hem de danışan takibi anlamında dijital çağda diyetisyenlerin ihtiyaç duyduğu tüm çözümleri bir araya getirir.`,
       images: [
-        "/images/diet-app.png",
-        "/images/diet-app1.png",
-        "/images/diet-app2.png",
+        "/images/diet-app.jpg",
+        "/images/diet-app1.jpg",
+        "/images/diet-app2.jpg",
       ],
     },
   ],
@@ -173,9 +173,9 @@ Menu Leaf is a modern web application that enables restaurants, cafes, and simil
 
 The project is developed with a component-based structure and a secure, maintainable architecture using TypeScript.`,
       images: [
-        "/images/nokta-kafe.png",
-        "/images/doya-doya.png",
-        "/images/menu-leaf.png",
+        "/images/nokta-kafe.jpg",
+        "/images/doya-doya.jpg",
+        "/images/menu-leaf.jpg",
       ],
     },
     {
@@ -211,9 +211,9 @@ The project is developed with a component-based structure and a secure, maintain
 - Excavation/packing & storage  
 - Packaging/partial/elevator transportation`,
       images: [
-        "/images/bilir-nakliyat1.png",
-        "/images/bilir-nakliyat2.png",
-        "/images/bilir-nakliyat3.png",
+        "/images/bilir-nakliyat1.jpg",
+        "/images/bilir-nakliyat2.jpg",
+        "/images/bilir-nakliyat3.jpg",
       ],
     },
     {
@@ -248,7 +248,7 @@ The project is developed with a component-based structure and a secure, maintain
       images: [
         "/images/tabu-epic.png",
         "/images/tabu.jpg",
-        "/images/tabu-2.jpg",
+        // "/images/tabu-2.jpg",
       ],
     },
     {
@@ -281,9 +281,9 @@ The project is developed with a component-based structure and a secure, maintain
 
 This platform combines all the digital solutions nutritionists need today for content creation and client tracking.`,
       images: [
-        "/images/diet-app.png",
-        "/images/diet-app1.png",
-        "/images/diet-app2.png",
+        "/images/diet-app.jpg",
+        "/images/diet-app1.jpg",
+        "/images/diet-app2.jpg",
       ],
     },
   ],
