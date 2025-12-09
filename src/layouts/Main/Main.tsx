@@ -5,54 +5,48 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 function Main() {
   const { language } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   // Dil bazlı metinler
   const texts = {
-    title: language === "tr" ? "Semih Kopcal Portfolyo" : "Semih Kopcal Portfolio",
-    subtitle: language === "tr" ? "Full-Stack Web Geliştirici" : "Full-Stack Web Developer",
+    title: language === "tr" ? "Semih Kopcal" : "Semih Kopcal",
+    subtitle: language === "tr" ? "Full-Stack Web Geliştirici ve Yaratıcı Problem Çözücü" : "Full-Stack Web Developer & Creative Problem Solver",
     downloadCV: language === "tr" ? "CV'mi İndir" : "Download My CV",
     contactMe: language === "tr" ? "İletişime Geç" : "Contact Me",
   };
 
   return (
     <div className={styles.mainC} id="home" data-theme={theme}>
+      <AnimatedBackground />
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.mainContent}>
-            <Image
-              src="/me.jpg"
-              alt="Profile Picture"
-              width={250}
-              height={250}
-              className={styles.profileImage}
-              priority
-            />
+            <div className={styles.imageWrapper}>
+              <Image
+                src="/me.jpg"
+                alt="Profile Picture"
+                width={200}
+                height={200}
+                className={styles.profileImage}
+                priority
+              />
+            </div>
             <h1 className={styles.title}>{texts.title}</h1>
-            <p className={styles.description}>{texts.subtitle}</p>
+            <p className={styles.subtitle}>{texts.subtitle}</p>
 
             <div className={styles.buttons}>
-              <a href="/cv/SemihKopcal.pdf" download className={styles.cvButton}>
+              <a href="/cv/SemihKopcal.pdf" download className={styles.primaryButton}>
                 {texts.downloadCV}
               </a>
 
-              <a className={styles.cwe} href="mailto:semihkopcal1@gmail.com">
-                {texts.contactMe}{" "}
-                <Image
-                  className={styles.icon}
-                  src={"/icons/email.svg"}
-                  alt="email"
-                  width={25}
-                  height={25}
-                  priority
-                />
+              <a className={styles.secondaryButton} href="#contact">
+                {texts.contactMe}
               </a>
             </div>
-
-           
           </div>
         </div>
       </div>

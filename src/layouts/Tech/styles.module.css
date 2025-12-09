@@ -1,28 +1,41 @@
 .sectionContainer {
-  padding: 40px 0;
+  padding: var(--spacing-2xl) 0;
   overflow: hidden;
-  background-color: var(--bg-color); /* Tema kontrollü zemin */
-  color: var(--text-color); /* Tema kontrollü metin */
-  max-width: 1200px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .title {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-2xl);
   color: var(--text-color);
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--main-color), var(--hover-color));
+  margin: var(--spacing-md) auto 0;
+  border-radius: var(--radius-sm);
 }
 
 .scrollerWrapper {
   width: 100%;
   overflow: hidden;
+  padding: var(--spacing-md) 0;
 }
 
 .logoScroller {
   display: flex;
-  gap: 30px;
-  padding: 10px 0;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-sm) 0;
   overflow-x: scroll;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -37,23 +50,67 @@
   min-width: 120px;
   text-align: center;
   flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.logoItem:hover {
+  transform: translateY(-5px);
 }
 
 .logoItem img {
   width: 60px;
   height: 60px;
   object-fit: contain;
-  margin-bottom: 8px;
-  transition: transform 0.3s ease;
+  margin-bottom: var(--spacing-xs);
+  transition: all var(--transition-fast);
+  filter: grayscale(50%);
 }
 
 .logoItem img:hover {
-  transform: scale(1.1);
-  filter: none;
+  transform: scale(1.15);
+  filter: grayscale(0%) brightness(1.1);
 }
 
 .logoName {
   font-size: 0.9rem;
-  opacity: 0.8;
+  font-weight: 600;
   color: var(--text-color);
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.logoItem:hover .logoName {
+  opacity: 1;
+  color: var(--main-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sectionContainer {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .logoItem {
+    min-width: 100px;
+  }
+
+  .logoItem img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoItem {
+    min-width: 80px;
+  }
+
+  .logoItem img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logoName {
+    font-size: 0.8rem;
+  }
 }
