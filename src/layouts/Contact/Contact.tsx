@@ -34,48 +34,22 @@ export default function Contact() {
     setLoading(true);
     setResponseMsg("");
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: "semihkopcal1@gmail.com",
-          subject: formData.subject,
-          text: `
-    Gönderen: ${formData.fullName} <${formData.email}>
-    Mesaj:
-    ${formData.message}
-  `,
-        }),
-      });
+    // Static site - open email client with mailto
+    const mailtoLink = `mailto:semihkopcal1@gmail.com?subject=${encodeURIComponent(
+      formData.subject
+    )}&body=${encodeURIComponent(
+      `Gönderen: ${formData.fullName} <${formData.email}>\n\nMesaj:\n${formData.message}`
+    )}`;
 
-      const data = await res.json();
-
-      if (res.ok) {
-        setResponseMsg(
-          language === "tr"
-            ? "Mesaj başarıyla gönderildi!"
-            : "Message sent successfully!"
-        );
-        setResponseStatus("success");
-        setFormData({ fullName: "", email: "", subject: "", message: "" });
-      } else {
-        setResponseMsg(
-          data.error ||
-            (language === "tr"
-              ? "Mesaj gönderilemedi."
-              : "Failed to send message.")
-        );
-        setResponseStatus("error");
-      }
-    } catch {
-      setResponseMsg(
-        language === "tr"
-          ? "Bir hata oluştu. Lütfen tekrar deneyin."
-          : "An error occurred. Please try again."
-      );
-      setResponseStatus("error");
-    }
+    window.location.href = mailtoLink;
+    
+    setResponseMsg(
+      language === "tr"
+        ? "E-posta uygulamanız açılıyor..."
+        : "Opening your email client..."
+    );
+    setResponseStatus("success");
+    setFormData({ fullName: "", email: "", subject: "", message: "" });
 
     setTimeout(() => {
       setResponseMsg("");

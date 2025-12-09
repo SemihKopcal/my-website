@@ -1,17 +1,12 @@
-import { NextResponse } from 'next/server';
+import { MetadataRoute } from 'next'
 
-export function GET() {
-  const robotsTxt = `
-User-agent: *
-Disallow:
-
-Sitemap: https://semihkopcal.com/sitemap.xml
-  `.trim();
-
-  return new NextResponse(robotsTxt, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/plain',
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: '',
     },
-  });
+    sitemap: 'https://semihkopcal.com/sitemap.xml',
+  }
 }
