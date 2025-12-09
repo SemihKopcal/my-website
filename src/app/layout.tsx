@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Semih Kopcal", url: "https://semihkopcal.com" }],
   creator: "Semih Kopcal",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
   openGraph: {
     title: "Semih Kopcal | Full Stack Web Developer",
     description:

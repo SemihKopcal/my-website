@@ -1,5 +1,5 @@
 .sectionContainer {
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-xl) var(--spacing-md);
   overflow: hidden;
   background-color: var(--background-color);
   color: var(--text-color);
@@ -11,7 +11,7 @@
   text-align: center;
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-lg);
   color: var(--text-color);
   position: relative;
 }
@@ -85,32 +85,58 @@
 }
 
 /* Responsive */
+@media (max-width: 968px) {
+  .sectionContainer {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .logoScroller {
+    gap: var(--spacing-lg);
+  }
+}
+
 @media (max-width: 768px) {
   .sectionContainer {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .title {
+    margin-bottom: var(--spacing-md);
   }
 
   .logoItem {
-    min-width: 100px;
+    min-width: 90px;
   }
 
   .logoItem img {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .logoScroller {
+    gap: var(--spacing-md);
   }
 }
 
 @media (max-width: 480px) {
+  .sectionContainer {
+    padding: var(--spacing-sm);
+  }
+
   .logoItem {
-    min-width: 80px;
+    min-width: 75px;
   }
 
   .logoItem img {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .logoName {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .logoScroller {
+    gap: var(--spacing-sm);
   }
 }

@@ -1,5 +1,5 @@
 .container {
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-md);
   max-width: 1200px;
   margin: 0 auto;
   background-color: var(--background-color);
@@ -26,9 +26,9 @@
 
 .projectGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--spacing-xl);
-  margin-top: var(--spacing-xl);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
 }
 
 .projectCard {
@@ -197,9 +197,20 @@
 }
 
 /* Responsive Design */
+@media (max-width: 968px) {
+  .container {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .projectGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: var(--spacing-md);
+  }
+}
+
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-sm);
   }
 
   .projectGrid {
@@ -208,29 +219,44 @@
   }
 
   .imageContainer {
-    height: 200px;
+    height: 180px;
+  }
+
+  .cardContent {
+    padding: var(--spacing-md);
   }
 
   .cardActions {
     flex-direction: column;
+    gap: var(--spacing-sm);
   }
 
   .primaryBtn,
   .secondaryBtn {
     width: 100%;
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
   .title {
     font-size: 1.8rem;
+    margin-bottom: var(--spacing-lg);
   }
 
   .projectTitle {
     font-size: 1.2rem;
   }
 
+  .imageContainer {
+    height: 160px;
+  }
+
   .cardContent {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
   }
 }

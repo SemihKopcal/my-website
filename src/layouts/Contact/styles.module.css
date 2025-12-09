@@ -1,10 +1,10 @@
 .contactSection {
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-md);
   background-color: var(--background-color);
   color: var(--text-color);
   display: flex;
   justify-content: center;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
   max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap;

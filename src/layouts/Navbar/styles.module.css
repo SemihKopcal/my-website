@@ -16,11 +16,11 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-md);
 }
 
 .headerUpper {
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-sm) 0;
 }
 
 .row {
@@ -149,7 +149,15 @@
 /* Responsive Design */
 @media (max-width: 968px) {
   .mainHeader {
-    padding: var(--spacing-sm) 0;
+    padding: 0;
+  }
+
+  .headerUpper {
+    padding: var(--spacing-xs) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
   }
 
   .sideMenuBtn {
@@ -160,14 +168,15 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: 300px;
     height: 100vh;
     background-color: var(--card-bg);
     border-left: 1px solid var(--card-border);
     box-shadow: var(--shadow-xl);
-    padding: var(--spacing-2xl) var(--spacing-lg);
-    transition: right var(--transition-normal);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    transition: right 0.3s ease-in-out;
     overflow-y: auto;
+    z-index: 9999;
   }
 
   .menuOpen {
@@ -178,38 +187,37 @@
     flex-direction: column;
     gap: var(--spacing-md);
     align-items: flex-start;
-    margin-top: var(--spacing-2xl);
+    margin-top: var(--spacing-xl);
   }
 
   .linkStyle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     width: 100%;
     padding: var(--spacing-sm) 0;
   }
 
   .utilityButtons {
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
     border-top: 1px solid var(--card-border);
     width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-md);
-  }
-
-  .mainMenu {
-    width: 100%;
-    max-width: 320px;
+    justify-content: flex-start;
+    gap: var(--spacing-md);
   }
 }
 
 @media (max-width: 480px) {
   .mainMenu {
-    width: 100%;
-    max-width: none;
+    width: 85%;
+    max-width: 320px;
+  }
+
+  .linkStyle {
+    font-size: 1rem;
+  }
+
+  .sideMenuBtn {
+    padding: var(--spacing-xs);
+    font-size: 1.3rem;
   }
 }

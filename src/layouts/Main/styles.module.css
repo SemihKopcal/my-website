@@ -16,7 +16,7 @@
   justify-content: center;
   position: relative;
   z-index: 2;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-sm);
 }
 
 .main {
@@ -33,8 +33,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   animation: fadeInUp 0.8s ease-out;
+  padding: 0 var(--spacing-sm);
 }
 
 @keyframes fadeInUp {
@@ -54,12 +55,12 @@
 }
 
 .profileImage {
-  width: 200px;
-  height: 200px;
+  width: clamp(150px, 40vw, 200px);
+  height: clamp(150px, 40vw, 200px);
   border-radius: var(--radius-full);
   object-fit: cover;
-  border: 4px solid var(--main-color);
-  box-shadow: 0 0 40px rgba(20, 184, 166, 0.3);
+  border: 3px solid var(--main-color);
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   animation: float 3s ease-in-out infinite;
 }
@@ -102,16 +103,18 @@
 .buttons {
   display: flex;
   gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  max-width: 600px;
 }
 
 .primaryButton {
   background: var(--main-color);
   color: var(--button-text-color);
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 600;
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
@@ -120,6 +123,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .primaryButton:hover {
@@ -131,8 +135,8 @@
 .secondaryButton {
   background: transparent;
   color: var(--main-color);
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 600;
   border: 2px solid var(--main-color);
   border-radius: var(--radius-md);
@@ -141,6 +145,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .secondaryButton:hover {
@@ -153,36 +158,46 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-sm);
   }
 
-  .profileImage {
-    width: 150px;
-    height: 150px;
+  .mainContent {
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-xs);
+  }
+
+  .buttons {
+    gap: var(--spacing-sm);
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-sm);
+  }
+
+  .mainContent {
+    gap: var(--spacing-xs);
   }
 
   .buttons {
     flex-direction: column;
-    width: 100%;
-    max-width: 300px;
+    gap: var(--spacing-sm);
+    max-width: 100%;
   }
 
   .primaryButton,
   .secondaryButton {
     width: 100%;
-    justify-content: center;
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .profileImage {
-    width: 120px;
-    height: 120px;
-  }
-
-  .mainContent {
-    gap: var(--spacing-sm);
+    padding: 0.9rem 1.5rem;
   }
 }
