@@ -29,6 +29,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Semih Kopcal", url: "https://semihkopcal.com" }],
   creator: "Semih Kopcal",
+  metadataBase: new URL("https://semihkopcal.com"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "tr-TR": "/tr",
+      "en-US": "/en",
+    },
+  },
   openGraph: {
     title: "Semih Kopcal | Full Stack Web Developer",
     description:
@@ -53,7 +61,6 @@ export const metadata: Metadata = {
     creator: "@semihkopcal",
     images: ["/images/og-image.png"],
   },
-  metadataBase: new URL("https://semihkopcal.com"),
 };
 
 export function generateViewport() {

@@ -23,7 +23,7 @@ export default function Main() {
 
   return (
     <section className={styles.hero} id="home">
-      <div className={styles.content}>
+      <header className={styles.content}>
         <p className={styles.role}>{role}</p>
         <h1 className={styles.description}>{intro}</h1>
         <p className={styles.name}>{name}</p>
@@ -32,7 +32,7 @@ export default function Main() {
           <a href="#contact" className={styles.primaryBtn}>{contactText}</a>
           <a href="/cv/SemihKopcal.pdf" download className={styles.secondaryBtn}>{cvText}</a>
         </div>
-      </div>
+      </header>
     </section>
   );
 }

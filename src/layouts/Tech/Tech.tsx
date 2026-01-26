@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "./styles.module.css";
 import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -117,7 +118,13 @@ export default function TechLogoScroller() {
         <div ref={scrollRef} className={styles.logoScroller}>
           {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
             <div key={index} className={styles.logoItem}>
-              <img src={logo.src} alt={logo.name} draggable={false} />
+              <Image 
+                src={logo.src} 
+                alt={`${logo.name} logo`} 
+                width={40} 
+                height={40} 
+                draggable={false} 
+              />
               <p className={styles.logoName}>{logo.name}</p>
             </div>
           ))}
