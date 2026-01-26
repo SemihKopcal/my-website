@@ -1,27 +1,22 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import contentData from '@/data/content.json';
 
+export const runtime = 'edge';
 export const dynamic = "force-dynamic";
-
-const contentPath = path.join(process.cwd(), 'src/data/content.json');
 
 export async function GET() {
   try {
-    const fileContents = fs.readFileSync(contentPath, 'utf8');
-    const data = JSON.parse(fileContents);
-    return NextResponse.json(data);
+    return NextResponse.json(contentData);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to load content' }, { status: 500 });
   }
 }
 
 export async function POST(request: Request) {
-  try {
-    const newData = await request.json();
-    fs.writeFileSync(contentPath, JSON.stringify(newData, null, 2), 'utf8');
-    return NextResponse.json({ message: 'Content updated successfully' });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to update content' }, { status: 500 });
-  }
+  // Note: Filesystem writes are not supported in Edge environments like Cloudflare Pages.
+  // This would typically need to be moved to a database or KV store.
+  return NextResponse.json(
+    { error: 'Content updates are not supported in the current production environment' }, 
+    { status: 405 }
+  );
 }
