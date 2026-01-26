@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { useTheme } from "@/context/ThemeContext";
 
 export default function Contact() {
   const { language } = useLanguage();
-  const { theme } = useTheme();
+  const [data, setData] = useState<any>(null);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -19,13 +17,16 @@ export default function Contact() {
 
   const [loading, setLoading] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
-  const [responseStatus, setResponseStatus] = useState<
-    "success" | "error" | ""
-  >("");
+  const [responseStatus, setResponseStatus] = useState<"success" | "error" | "">("");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  useEffect(() => {
+    fetch("/api/content")
+      .then(res => res.json())
+      .then(json => setData(json.contact))
+      .catch(err => console.error("Contact content load error:", err));
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -34,7 +35,6 @@ export default function Contact() {
     setLoading(true);
     setResponseMsg("");
 
-    // Static site - open email client with mailto
     const mailtoLink = `mailto:semihkopcal1@gmail.com?subject=${encodeURIComponent(
       formData.subject
     )}&body=${encodeURIComponent(
@@ -59,115 +59,80 @@ export default function Contact() {
     setLoading(false);
   };
 
+  if (!data) return null;
+
+  const { subtitle } = language === "tr" ? data.tr : data.en;
+  const title = language === "tr" ? "İLETİŞİM" : "CONTACT";
+
   return (
-    <section
-      className={`${styles.contactSection} ${
-        theme === "dark" ? styles.darkTheme : ""
-      }`}
-      id="contact"
-    >
-      <div className={styles.left}>
-        <Image
-          className={styles.img}
-          src={"/SemihKopcalPhotoCv.jpg"}
-          width={300}
-          height={300}
-          alt="Contact-Image"
-          priority
-        />
-        <h2 className={styles.contactTitle}>
-          {language === "tr" ? "İletişime Geçin" : "Get in Touch"}
-        </h2>
-        <p className={styles.contactDescription}>
-          {language === "tr"
-            ? "Sizden haber almak isterim! Sorularınız, geri bildirimleriniz ya da sadece merhaba demek için bile olsa, lütfen benimle iletişime geçmekten çekinmeyin."
-            : "I would love to hear from you! Whether you have questions, feedback, or just want to say hello, please don't hesitate to contact me."}
-        </p>
+    <section className={styles.contact} id="contact">
+      <div className={styles.header}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.subtitle}>{subtitle}</p>
       </div>
+
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="fullName">
-            {language === "tr" ? "AD SOYAD" : "FULL NAME"}
-          </label>
-          <input
-            className={styles.inputField}
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            autoComplete="name"
-          />
+        <div className={styles.inputRow}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="fullName">{language === "tr" ? "AD SOYAD" : "NAME"}</label>
+            <input
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              className={styles.input}
+              autoComplete="name"
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">{language === "tr" ? "E-POSTA" : "EMAIL"}</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={styles.input}
+              autoComplete="email"
+            />
+          </div>
         </div>
 
         <div className={styles.inputGroup}>
-          <label htmlFor="email">
-            {language === "tr" ? "E-POSTA ADRESİ" : "EMAIL ADDRESS"}
-          </label>
+          <label htmlFor="subject">{language === "tr" ? "KONU" : "SUBJECT"}</label>
           <input
-            className={styles.inputField}
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            autoComplete="email"
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="subject">
-            {language === "tr" ? "KONU" : "SUBJECT"}
-          </label>
-          <input
-            className={styles.inputField}
             id="subject"
             name="subject"
             value={formData.subject}
             onChange={handleChange}
             required
+            className={styles.input}
           />
         </div>
 
         <div className={styles.inputGroup}>
-          <label htmlFor="message">
-            {language === "tr" ? "MESAJINIZ" : "YOUR MESSAGE"}
-          </label>
+          <label htmlFor="message">{language === "tr" ? "MESAJ" : "MESSAGE"}</label>
           <textarea
-            className={styles.textArea}
             id="message"
             name="message"
             rows={5}
             value={formData.message}
             onChange={handleChange}
             required
+            className={styles.textarea}
           />
         </div>
 
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={loading}
-          aria-busy={loading}
-        >
+        <button type="submit" className={styles.submitBtn} disabled={loading}>
           {loading
-            ? language === "tr"
-              ? "Gönderiliyor..."
-              : "Sending..."
-            : language === "tr"
-            ? "Mesaj Gönder ✉️"
-            : "Send Message ✉️"}
+            ? language === "tr" ? "Gönderiliyor..." : "Sending..."
+            : language === "tr" ? "Bağlantı Kur" : "Get in Touch"}
         </button>
 
         {responseMsg && (
-          <p
-            className={styles.responseMessage}
-            style={{
-              color: responseStatus === "success" ? "#4BB543" : "#f1592a",
-            }}
-            role="alert"
-          >
+          <p className={styles.response} style={{ color: responseStatus === "success" ? "var(--accent-color)" : "#f1592a" }}>
             {responseMsg}
           </p>
         )}

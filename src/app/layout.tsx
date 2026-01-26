@@ -17,36 +17,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Semih Kopcal | Full Stack Web Developer",
   description:
-    "Semih Kopcal'ın kişisel portföy sitesi. Web geliştirme, projeler, blog yazıları ve iletişim bilgileri.",
+    "Semih Kopcal'ın minimalist portföyü. Modern web çözümleri, Full-Stack geliştirme ve yaratıcı mühendislik projeleri.",
   keywords: [
     "Semih Kopcal",
-    "web developer",
-    "yazılım geliştirici",
-    "frontend",
-    "backend",
-    "portföy",
-    "react",
-    "next.js",
+    "Full Stack Developer",
+    "Minimalist Web Design",
+    "Next.js Developer",
+    "React Engineer",
+    "Portfolio",
+    "Software Engineering"
   ],
   authors: [{ name: "Semih Kopcal", url: "https://semihkopcal.com" }],
   creator: "Semih Kopcal",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   openGraph: {
     title: "Semih Kopcal | Full Stack Web Developer",
     description:
-      "Semih Kopcal'ın kişisel portföy sitesini ziyaret edin. Web geliştirme projeleri ve daha fazlası.",
+      "Modern ve performanslı web çözümleri sunan Semih Kopcal'ın kişisel portföyünü keşfedin.",
     url: "https://semihkopcal.com",
     siteName: "Semih Kopcal",
     images: [
       {
-        url: "https://semihkopcal.com/images/og-image.png", // og:image
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Semih Kopcal kişisel web sitesi",
+        alt: "Semih Kopcal Portfolio",
       },
     ],
     locale: "tr_TR",
@@ -54,13 +48,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Semih Kopcal | Full Stack Web Developer",
-    description: "Semih Kopcal'ın kişisel web sitesi.",
+    title: "Semih Kopcal | Minimalist Portfolio",
+    description: "Full Stack Web Developer & Software Engineer.",
     creator: "@semihkopcal",
-    images: ["https://semihkopcal.com/images/og-image.png"],
+    images: ["/images/og-image.png"],
   },
-  metadataBase: new URL("https://semihkopcal.com"), // canonical URL için
+  metadataBase: new URL("https://semihkopcal.com"),
 };
+
+export function generateViewport() {
+  return {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  };
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{

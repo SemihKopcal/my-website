@@ -1,57 +1,38 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { useTheme } from "@/context/ThemeContext";
-import AnimatedBackground from "@/components/AnimatedBackground";
 
-function Main() {
+export default function Main() {
   const { language } = useLanguage();
-  const { theme } = useTheme();
+  const [data, setData] = useState<any>(null);
 
-  // Dil bazlı metinler
-  const texts = {
-    title: language === "tr" ? "Semih Kopcal" : "Semih Kopcal",
-    subtitle: language === "tr" ? "Full-Stack Web Geliştirici ve Yaratıcı Problem Çözücü" : "Full-Stack Web Developer & Creative Problem Solver",
-    downloadCV: language === "tr" ? "CV'mi İndir" : "Download My CV",
-    contactMe: language === "tr" ? "İletişime Geç" : "Contact Me",
-  };
+  useEffect(() => {
+    fetch("/api/content")
+      .then(res => res.json())
+      .then(json => setData(json.hero))
+      .catch(err => console.error("Hero content load error:", err));
+  }, []);
+
+  if (!data) return null;
+
+  const { role, intro, name } = language === "tr" ? data.tr : data.en;
+  const contactText = language === "tr" ? "İletişime Geç" : "Get in Touch";
+  const cvText = language === "tr" ? "Özgeçmiş" : "CV";
 
   return (
-    <div className={styles.mainC} id="home" data-theme={theme}>
-      <AnimatedBackground />
-      <div className={styles.container}>
-        <div className={styles.main}>
-          <div className={styles.mainContent}>
-            <div className={styles.imageWrapper}>
-              <Image
-                src="/me.jpg"
-                alt="Profile Picture"
-                width={200}
-                height={200}
-                className={styles.profileImage}
-                priority
-              />
-            </div>
-            <h1 className={styles.title}>{texts.title}</h1>
-            <p className={styles.subtitle}>{texts.subtitle}</p>
-
-            <div className={styles.buttons}>
-              <a href="/cv/SemihKopcal.pdf" download className={styles.primaryButton}>
-                {texts.downloadCV}
-              </a>
-
-              <a className={styles.secondaryButton} href="#contact">
-                {texts.contactMe}
-              </a>
-            </div>
-          </div>
+    <section className={styles.hero} id="home">
+      <div className={styles.content}>
+        <p className={styles.role}>{role}</p>
+        <h1 className={styles.description}>{intro}</h1>
+        <p className={styles.name}>{name}</p>
+        
+        <div className={styles.actions}>
+          <a href="#contact" className={styles.primaryBtn}>{contactText}</a>
+          <a href="/cv/SemihKopcal.pdf" download className={styles.secondaryBtn}>{cvText}</a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
-
-export default Main;

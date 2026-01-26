@@ -1,4 +1,4 @@
-lockfileVersion: '9.0'
+npm install -g npm@11.8.0lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
