@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import React from 'react'
 import Custom404 from '@/pages/404'
 
