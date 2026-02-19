@@ -1,4 +1,4 @@
-export const runtime = 'experimental-edge';
+
 import React from 'react'
 import Custom404 from '@/components/Custom404'
 

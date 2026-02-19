@@ -1,8 +1,8 @@
-export const runtime = 'experimental-edge';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import styles from './styles.module.css'; 
+import styles from './styles.module.css';
 
 const Custom404: React.FC = () => {
   return (
