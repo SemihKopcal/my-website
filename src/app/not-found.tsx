@@ -1,11 +1,11 @@
 export const runtime = 'experimental-edge';
 import React from 'react'
-import Custom404 from '@/pages/404'
+import Custom404 from '@/components/Custom404'
 
 function NotFound() {
   return (
     <div>
-        <Custom404 />
+      <Custom404 />
     </div>
   )
 }
