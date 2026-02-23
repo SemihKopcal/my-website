@@ -35,28 +35,38 @@ export default function Contact() {
     setLoading(true);
     setResponseMsg("");
 
-    const mailtoLink = `mailto:semihkopcal1@gmail.com?subject=${encodeURIComponent(
-      formData.subject
-    )}&body=${encodeURIComponent(
-      `Gönderen: ${formData.fullName} <${formData.email}>\n\nMesaj:\n${formData.message}`
-    )}`;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    window.location.href = mailtoLink;
-    
-    setResponseMsg(
-      language === "tr"
-        ? "E-posta uygulamanız açılıyor..."
-        : "Opening your email client..."
-    );
-    setResponseStatus("success");
-    setFormData({ fullName: "", email: "", subject: "", message: "" });
-
-    setTimeout(() => {
-      setResponseMsg("");
-      setResponseStatus("");
-    }, 3000);
-
-    setLoading(false);
+      if (res.ok) {
+        setResponseMsg(
+          language === "tr"
+            ? "Mesajınız başarıyla iletildi!"
+            : "Your message has been sent successfully!"
+        );
+        setResponseStatus("success");
+        setFormData({ fullName: "", email: "", subject: "", message: "" });
+      } else {
+        throw new Error("API hatası");
+      }
+    } catch (err) {
+      setResponseMsg(
+        language === "tr"
+          ? "Bir hata oluştu, lütfen mailto:semihkopcal1@gmail.com üzerinden ulaşın."
+          : "An error occurred, please reach out via mailto:semihkopcal1@gmail.com"
+      );
+      setResponseStatus("error");
+    } finally {
+      setTimeout(() => {
+        setResponseMsg("");
+        setResponseStatus("");
+      }, 5000);
+      setLoading(false);
+    }
   };
 
   if (!data) return null;

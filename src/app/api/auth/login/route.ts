@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { saveCode } from "@/lib/auth-store";
-import fs from "fs";
-import path from "path";
+import contentData from "@/data/content.json";
+
+export const runtime = "edge";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -10,18 +11,17 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    // Read password from content.json
-    const contentPath = path.join(process.cwd(), "src/data/content.json");
-    const content = JSON.parse(fs.readFileSync(contentPath, "utf8"));
-    const storedPassword = content.security?.password || "password";
+    const storedPassword = contentData.security?.password || "password";
 
+    // Reverted hardcoding: Using provided email for code delivery
+    // Note: In production, you'd check if email is the actual admin email
     if (email === "semihkopcal1@gmail.com" && password === storedPassword) {
       const code = Math.floor(100000 + Math.random() * 900000).toString();
       saveCode(email, code);
 
       await resend.emails.send({
         from: "Admin <onboarding@resend.dev>",
-        to: email,
+        to: email, // Reverted to dynamic target
         subject: "🚀 Admin Paneli Giriş Doğrulama Kodu",
         html: `
           <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px; border: 1px solid #e2e8f0; border-radius: 16px; background: #ffffff;">

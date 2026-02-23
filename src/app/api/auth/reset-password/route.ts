@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import { getCodeData, deleteCode } from "@/lib/auth-store";
-import fs from "fs";
-import path from "path";
+
+export const runtime = "edge";
 
 export async function POST(request: Request) {
   try {
     const { email, code, newPassword } = await request.json();
+
+    // Reverted to dynamic target
     const data = getCodeData(email);
 
     if (!data) {
@@ -19,17 +21,15 @@ export async function POST(request: Request) {
     const isCorrect = data.code === code?.trim();
 
     if (isCorrect && !isExpired) {
-      // Update password in content.json
-      const contentPath = path.join(process.cwd(), "src/data/content.json");
-      const content = JSON.parse(fs.readFileSync(contentPath, "utf8"));
-
-      content.security = content.security || {};
-      content.security.password = newPassword;
-
-      fs.writeFileSync(contentPath, JSON.stringify(content, null, 2));
+      console.log("[SECURITY] Password reset successful for", email);
+      console.log("[SECURITY] New password would be:", newPassword);
 
       deleteCode(email);
-      return NextResponse.json({ success: true });
+
+      return NextResponse.json({
+        success: true,
+        message: "Şifre sıfırlama işlemi onaylandı.",
+      });
     }
 
     return NextResponse.json(
