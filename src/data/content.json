@@ -2,7 +2,7 @@
   "hero": {
     "tr": {
       "role": "Full-Stack Web Geliştirici",
-      "intro": "Performans odaklı, sade ve ölçeklenebilir web çözümleri geliştiririm.",
+      "intro": "Performans odaklı, sade ve ölçeklenebilir web çözümleri geliştiririm. ",
       "name": "Semih Kopcal"
     },
     "en": {
@@ -15,27 +15,71 @@
     "tr": {
       "description": "Sakarya Üniversitesi Bilişim Sistemleri Mühendisliği son sınıf öğrencisiyim. Üç yılı aşkın tam yığın (full-stack) web geliştirme deneyimimle profesyonel yazılım çözümleri üretiyor, halihazırda bir mobil uygulama geliştirme şirketinde backend developer olarak kariyerime devam ediyorum.",
       "skills": [
-        "React", "Next.js", "TypeScript", "Node.js", "NestJS", 
-        "PostgreSQL", "MongoDB", "Docker", "Git", "Tailwind CSS", 
-        "REST API", "GraphQL", "JWT", "MS SQL", "PHP", "Laravel"
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "PostgreSQL",
+        "MongoDB",
+        "Docker",
+        "Git",
+        "Tailwind CSS",
+        "REST API",
+        "GraphQL",
+        "JWT",
+        "MS SQL",
+        "PHP",
+        "Laravel"
       ],
       "stats": [
-        { "number": "3+", "label": "Yıllık Deneyim" },
-        { "number": "5+", "label": "Tamamlanan Proje" },
-        { "number": "90%+", "label": "Pozitif Geri Bildirim" }
+        {
+          "number": "3+",
+          "label": "Yıllık Deneyim"
+        },
+        {
+          "number": "5+",
+          "label": "Tamamlanan Proje"
+        },
+        {
+          "number": "90%+",
+          "label": "Pozitif Geri Bildirim"
+        }
       ]
     },
     "en": {
       "description": "I am a senior Information Systems Engineering student at Sakarya University with over three years of active Full-Stack Web Development experience. Having contributed to various industrial software solutions, I am currently advancing my career as a Backend Developer at a mobile application development company.",
       "skills": [
-        "React", "Next.js", "TypeScript", "Node.js", "NestJS", 
-        "PostgreSQL", "MongoDB", "Docker", "Git", "Tailwind CSS", 
-        "REST API", "GraphQL", "JWT", "MS SQL", "PHP", "Laravel"
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "PostgreSQL",
+        "MongoDB",
+        "Docker",
+        "Git",
+        "Tailwind CSS",
+        "REST API",
+        "GraphQL",
+        "JWT",
+        "MS SQL",
+        "PHP",
+        "Laravel"
       ],
       "stats": [
-        { "number": "3+", "label": "Years of Experience" },
-        { "number": "5+", "label": "Completed Projects" },
-        { "number": "90%+", "label": "Positive Feedback" }
+        {
+          "number": "3+",
+          "label": "Years of Experience"
+        },
+        {
+          "number": "5+",
+          "label": "Completed Projects"
+        },
+        {
+          "number": "90%+",
+          "label": "Positive Feedback"
+        }
       ]
     }
   },
@@ -49,5 +93,8 @@
   },
   "footer": {
     "year": "2025"
+  },
+  "security": {
+    "password": "password"
   }
 }

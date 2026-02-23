@@ -3,12 +3,15 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./admin.module.css";
+import Monitoring from "@/components/Admin/Monitoring";
+import SecuritySettings from "@/components/Admin/SecuritySettings";
 
 export default function AdminPage() {
   const [content, setContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<"tr" | "en" | "common">("tr");
+  const [activeTab, setActiveTab] = useState<"tr" | "en" | "common" | "monitoring" | "security">("tr");
+
   const [status, setStatus] = useState<{ type: "success" | "error", msg: string } | null>(null);
   const router = useRouter();
 
@@ -106,23 +109,35 @@ export default function AdminPage() {
 
       <main className={styles.mainGrid}>
         <div className={styles.tabs}>
-          <button 
-            onClick={() => setActiveTab("tr")} 
+          <button
+            onClick={() => setActiveTab("tr")}
             className={`${styles.tabBtn} ${activeTab === "tr" ? styles.activeTab : ""}`}
           >
             Türkçe İçerik
           </button>
-          <button 
-            onClick={() => setActiveTab("en")} 
+          <button
+            onClick={() => setActiveTab("en")}
             className={`${styles.tabBtn} ${activeTab === "en" ? styles.activeTab : ""}`}
           >
             English Content
           </button>
-          <button 
-            onClick={() => setActiveTab("common")} 
+          <button
+            onClick={() => setActiveTab("common")}
             className={`${styles.tabBtn} ${activeTab === "common" ? styles.activeTab : ""}`}
           >
             Genel Ayarlar
+          </button>
+          <button
+            onClick={() => setActiveTab("monitoring")}
+            className={`${styles.tabBtn} ${activeTab === "monitoring" ? styles.activeTab : ""}`}
+          >
+            Trafik İzleme
+          </button>
+          <button
+            onClick={() => setActiveTab("security")}
+            className={`${styles.tabBtn} ${activeTab === "security" ? styles.activeTab : ""}`}
+          >
+            Güvenlik
           </button>
         </div>
 
@@ -132,23 +147,23 @@ export default function AdminPage() {
               <h2>Hero Section — {activeTab.toUpperCase()}</h2>
               <div className={styles.inputGroup}>
                 <label>Görünen İsim</label>
-                <input 
-                  value={content.hero[activeTab].name} 
+                <input
+                  value={content.hero[activeTab].name}
                   onChange={(e) => updateField(`hero.${activeTab}.name`, e.target.value)}
                 />
               </div>
               <div className={styles.inputGroup}>
                 <label>Rol / Unvan</label>
-                <input 
-                  value={content.hero[activeTab].role} 
+                <input
+                  value={content.hero[activeTab].role}
                   onChange={(e) => updateField(`hero.${activeTab}.role`, e.target.value)}
                 />
               </div>
               <div className={styles.inputGroup}>
                 <label>Giriş Cümlesi</label>
-                <textarea 
+                <textarea
                   className={styles.textarea}
-                  value={content.hero[activeTab].intro} 
+                  value={content.hero[activeTab].intro}
                   onChange={(e) => updateField(`hero.${activeTab}.intro`, e.target.value)}
                 />
               </div>
@@ -158,13 +173,13 @@ export default function AdminPage() {
               <h2>About Section — {activeTab.toUpperCase()}</h2>
               <div className={styles.inputGroup}>
                 <label>Hakkımda Açıklaması</label>
-                <textarea 
+                <textarea
                   className={styles.textarea}
-                  value={content.about[activeTab].description} 
+                  value={content.about[activeTab].description}
                   onChange={(e) => updateField(`about.${activeTab}.description`, e.target.value)}
                 />
               </div>
-              
+
               <div className={styles.skillsArea}>
                 <label style={{ fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", color: "var(--text-secondary)" }}>
                   Yetenekler (Skills)
@@ -185,8 +200,8 @@ export default function AdminPage() {
               <h2>Contact Section — {activeTab.toUpperCase()}</h2>
               <div className={styles.inputGroup}>
                 <label>İletişim Alt Başlığı</label>
-                <input 
-                  value={content.contact[activeTab].subtitle} 
+                <input
+                  value={content.contact[activeTab].subtitle}
                   onChange={(e) => updateField(`contact.${activeTab}.subtitle`, e.target.value)}
                 />
               </div>
@@ -199,14 +214,23 @@ export default function AdminPage() {
             <h2>Genel Site Ayarları</h2>
             <div className={styles.inputGroup}>
               <label>Footer Yılı</label>
-              <input 
-                value={content.footer.year} 
+              <input
+                value={content.footer.year}
                 onChange={(e) => updateField("footer.year", e.target.value)}
               />
             </div>
-            <p style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
-              * Diğer genel ayarlar buraya eklenebilir (örn. Sosyal medya linkleri).
-            </p>
+          </section>
+        )}
+
+        {activeTab === "monitoring" && (
+          <section className={styles.section}>
+            <Monitoring />
+          </section>
+        )}
+
+        {activeTab === "security" && (
+          <section className={styles.section}>
+            <SecuritySettings />
           </section>
         )}
       </main>
