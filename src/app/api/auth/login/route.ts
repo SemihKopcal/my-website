@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { saveCode } from "@/lib/auth-store";
+import { create2FAChallenge } from "@/lib/auth-utils";
 import contentData from "@/data/content.json";
 
 export const runtime = "edge";
@@ -10,18 +10,17 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
-
     const storedPassword = contentData.security?.password || "password";
 
-    // Reverted hardcoding: Using provided email for code delivery
-    // Note: In production, you'd check if email is the actual admin email
     if (email === "semihkopcal1@gmail.com" && password === storedPassword) {
       const code = Math.floor(100000 + Math.random() * 900000).toString();
-      saveCode(email, code);
+
+      // CREATE STATELESS CHALLENGE
+      const challengeToken = await create2FAChallenge(email, code);
 
       await resend.emails.send({
         from: "Admin <onboarding@resend.dev>",
-        to: email, // Reverted to dynamic target
+        to: email,
         subject: "🚀 Admin Paneli Giriş Doğrulama Kodu",
         html: `
           <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px; border: 1px solid #e2e8f0; border-radius: 16px; background: #ffffff;">
@@ -43,7 +42,18 @@ export async function POST(request: Request) {
         `,
       });
 
-      return NextResponse.json({ success: true, requires2FA: true });
+      const response = NextResponse.json({ success: true, requires2FA: true });
+
+      // Store challenge in HttpOnly cookie
+      response.cookies.set("2fa_challenge", challengeToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 120, // 2 minutes
+        path: "/",
+      });
+
+      return response;
     }
 
     return NextResponse.json(
