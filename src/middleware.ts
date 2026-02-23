@@ -25,29 +25,44 @@ export async function middleware(request: NextRequest) {
     const deviceId = await getDeviceId(ip, userAgent);
 
     // Try Cache First (Saves Quota)
-    let locationData = getCachedIpInfo(ip);
+    const cached = getCachedIpInfo(ip);
+    let locationData: { city: string; country: string; isp: string };
 
-    if (!locationData && ip !== "127.0.0.1" && ip !== "::1") {
+    if (cached) {
+      locationData = {
+        city: cached.city,
+        country: cached.country,
+        isp: cached.isp,
+      };
+    } else if (ip !== "127.0.0.1" && ip !== "::1") {
       try {
         const res = await fetch(
           `http://ip-api.com/json/${ip}?fields=status,country,city,isp`,
         );
         const data = await res.json();
         if (data.status === "success") {
-          const info = {
+          locationData = {
             city: data.city,
             country: data.country,
             isp: data.isp,
           };
-          setCachedIpInfo(ip, info); // Cache for 24h
-          locationData = info;
+          setCachedIpInfo(ip, locationData); // Cache for 24h
+        } else {
+          locationData = {
+            city: "Bilinmiyor",
+            country: "Bilinmiyor",
+            isp: "Bilinmiyor",
+          };
         }
       } catch (err) {
         console.error("[MONITORING] IP IQ Fetch Error:", err);
+        locationData = {
+          city: "Bilinmiyor",
+          country: "Bilinmiyor",
+          isp: "Bilinmiyor",
+        };
       }
-    }
-
-    if (!locationData) {
+    } else {
       locationData = {
         city: "Bilinmiyor",
         country: "Bilinmiyor",
