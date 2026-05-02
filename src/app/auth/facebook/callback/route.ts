@@ -67,14 +67,23 @@ export async function GET(request: Request) {
 
     console.log("Facebook User Logged In:", userData);
 
-    // 6. Handle successful login (e.g., set session cookie, create user in DB)
-    // For now, we redirect to admin with success
-    const response = NextResponse.redirect(new URL("/admin?auth=success", request.url));
-    
-    // Example: Set a cookie with the user name
-    response.cookies.set("user_name", userData.name, { path: "/" });
+    // 6. Yetki Kontrolü ve Giriş İşlemi kanka
+    if (userData.email === "semihkopcal1@gmail.com") {
+      const response = NextResponse.redirect(new URL("/admin", request.url));
+      
+      // Admin token'ı oluşturuyoruz
+      response.cookies.set("admin_token", "secure_session_token_" + Date.now(), {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        maxAge: 60 * 60 * 24, // 1 gün
+      });
 
-    return response;
+      return response;
+    }
+
+    // Eğer yetkili değilse login sayfasına hata ile gönder
+    return NextResponse.redirect(new URL("/admin/login?error=unauthorized", request.url));
 
   } catch (err) {
     console.error("Auth process error:", err);
