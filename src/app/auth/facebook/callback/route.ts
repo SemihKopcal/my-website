@@ -31,9 +31,18 @@ export async function GET(request: Request) {
     const clientSecret = process.env.FACEBOOK_CLIENT_SECRET;
     const redirectUri = process.env.FACEBOOK_CALLBACK_URL;
 
-    if (!clientSecret) {
-      console.error("Missing FACEBOOK_CLIENT_SECRET in .env");
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+    // Detaylı hata kontrolü kanka
+    if (!clientId || !clientSecret || !redirectUri) {
+      const missing = [];
+      if (!clientId) missing.push("FACEBOOK_CLIENT_ID");
+      if (!clientSecret) missing.push("FACEBOOK_CLIENT_SECRET");
+      if (!redirectUri) missing.push("FACEBOOK_CALLBACK_URL");
+      
+      console.error("Eksik Değişkenler:", missing.join(", "));
+      return NextResponse.json({ 
+        error: "Server configuration error", 
+        missing: missing 
+      }, { status: 500 });
     }
 
     // 4. Exchange code for access token (GET request kanka)
