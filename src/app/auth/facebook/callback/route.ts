@@ -27,21 +27,22 @@ export async function GET(request: Request) {
   }
 
   try {
-    const clientId = process.env.FACEBOOK_CLIENT_ID;
+    // Cloudflare Pages bazen process.env'yi direkt vermez, alternatifleri de deneyelim
+    const clientId = process.env.FACEBOOK_CLIENT_ID || (process.env as any).NEXT_PUBLIC_FACEBOOK_CLIENT_ID;
     const clientSecret = process.env.FACEBOOK_CLIENT_SECRET;
     const redirectUri = process.env.FACEBOOK_CALLBACK_URL;
 
-    // Detaylı hata kontrolü kanka
     if (!clientId || !clientSecret || !redirectUri) {
       const missing = [];
       if (!clientId) missing.push("FACEBOOK_CLIENT_ID");
       if (!clientSecret) missing.push("FACEBOOK_CLIENT_SECRET");
       if (!redirectUri) missing.push("FACEBOOK_CALLBACK_URL");
       
-      console.error("Eksik Değişkenler:", missing.join(", "));
       return NextResponse.json({ 
         error: "Server configuration error", 
-        missing: missing 
+        missing: missing,
+        hint: "Cloudflare dashboard'da Production ortamına eklediğinden ve Redeploy yaptığından emin ol kanka.",
+        available_env: Object.keys(process.env).filter(k => !k.includes("KEY") && !k.includes("SECRET")) // Güvenlik için secretları gizleyip sadece anahtarları görelim
       }, { status: 500 });
     }
 
