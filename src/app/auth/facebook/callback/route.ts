@@ -33,16 +33,9 @@ export async function GET(request: Request) {
     const redirectUri = process.env.FACEBOOK_CALLBACK_URL;
 
     if (!clientId || !clientSecret || !redirectUri) {
-      const missing = [];
-      if (!clientId) missing.push("FACEBOOK_CLIENT_ID");
-      if (!clientSecret) missing.push("FACEBOOK_CLIENT_SECRET");
-      if (!redirectUri) missing.push("FACEBOOK_CALLBACK_URL");
-      
       return NextResponse.json({ 
         error: "Server configuration error", 
-        missing: missing,
-        hint: "Cloudflare dashboard'da Production ortamına eklediğinden ve Redeploy yaptığından emin ol kanka.",
-        available_env: Object.keys(process.env).filter(k => !k.includes("KEY") && !k.includes("SECRET")) // Güvenlik için secretları gizleyip sadece anahtarları görelim
+        hint: "Cloudflare dashboard'da Production ortamına eklediğinden ve Redeploy yaptığından emin ol kanka."
       }, { status: 500 });
     }
 
@@ -90,4 +83,3 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
-
